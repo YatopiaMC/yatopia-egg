@@ -11,10 +11,9 @@
 # HEAP_SIZE: This is how much heap (in MB) you plan to allocate
 #            to your server. By default, this is set to 4096MB,
 #            or 4GB.
-MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
-MEM_TOTALLE=${MEM_TOTAL::-3}
-MEM_TOTALMB=$(($MEM_TOTALLE / 1024))
-HEAP_SIZE=$(($MEM_TOTALMB * 90 / 100))
+#MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
+#MEM_TOTALLE=${MEM_TOTAL::-3}
+HEAP_SIZE=$(($1 * 85 / 100))
 
 # JAR_NAME:  The name of your server's JAR file.
 JAR_NAME=yapfa.jar
