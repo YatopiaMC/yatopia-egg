@@ -13,7 +13,7 @@
 #            or 4GB.
 MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
 MEM_TOTALLE=${MEM_TOTAL::-3}
-MEM_TOTALMB=$(($MEM_TOTALLE / 1000))
+MEM_TOTALMB=$(($MEM_TOTALLE / 100000))
 HEAP_SIZE=$(($MEM_TOTALMB * 90 / 100))
 
 # JAR_NAME:  The name of your server's JAR file.
