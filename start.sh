@@ -12,7 +12,8 @@
 #            to your server. By default, this is set to 4096MB,
 #            or 4GB.
 MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
-MEM_TOTALMB=${MEM_TOTAL::-3}
+MEM_TOTALLE=${MEM_TOTAL::-3}
+MEM_TOTALMB=$(($MEM_TOTALLE / 1000))
 HEAP_SIZE=$(($MEM_TOTALMB * 90 / 100))
 
 # JAR_NAME:  The name of your server's JAR file.
@@ -35,11 +36,11 @@ NURSERY_MAXIMUM=$(($HEAP_SIZE * 4 / 5))
 # Launch the server.
 if [ 24576 < $HEAP_SIZE ]
 then
-	CMD="java -Xms${HEAP}M -Xmx${HEAP}M -Xmns${NURSERY_MIN}M -Xmnx${NURSERY_MAX}M -Xgc:concurrentScavenge -Xgc:dnssExpectedTimeRatioMaximum=3 -Xgc:scvNoAdaptiveTenure -Xdisableexplicitgc -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:-UseParallelGC -XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+UseGCOverheadLimit -XX:+ParallelRefProcEnabled -XX:-OmitStackTraceInFastThrow -XX:+ShowCodeDetailsInExceptionMessages -XX:+AlwaysPreTouch -XX:+UseAdaptiveGCBoundary -XX:-DontCompileHugeMethods -XX:+TrustFinalNonStaticFields -XX:+UseFastUnorderedTimeStamps -XX:+UseTransparentHugePages -XX:+UseLargePagesInMetaspace -XX:LargePageSizeInBytes=2M -XX:+UseLargePages -Xjit:enableGPU -Xshareclasses -XX:-IgnoreUnrecognizedXXColonOptions -Xnocompressedrefs -jar ${JAR_NAME} -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -Dibm.gpu.enable=all -Dibm.gpu.verbose=true -Dterminal.jline=false -Dterminal.ansi=true"
+	CMD="java -Xms${HEAP_SIZE}M -Xmx${HEAP_SIZE}M -Xmns${NURSERY_MINIMUM}M -Xmnx${NURSERY_MAXIMUM}M -Xgc:concurrentScavenge -Xgc:dnssExpectedTimeRatioMaximum=3 -Xgc:scvNoAdaptiveTenure -Xdisableexplicitgc -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:-UseParallelGC -XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+UseGCOverheadLimit -XX:+ParallelRefProcEnabled -XX:-OmitStackTraceInFastThrow -XX:+ShowCodeDetailsInExceptionMessages -XX:+AlwaysPreTouch -XX:+UseAdaptiveGCBoundary -XX:-DontCompileHugeMethods -XX:+TrustFinalNonStaticFields -XX:+UseFastUnorderedTimeStamps -XX:+UseTransparentHugePages -XX:+UseLargePagesInMetaspace -XX:LargePageSizeInBytes=2M -XX:+UseLargePages -Xjit:enableGPU -Xshareclasses -XX:-IgnoreUnrecognizedXXColonOptions -Xnocompressedrefs -jar ${JAR_NAME} -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -Dibm.gpu.enable=all -Dibm.gpu.verbose=true -Dterminal.jline=false -Dterminal.ansi=true"
 fi
 if [ 24576 > $HEAP_SIZE ]
 then
-	CMD="java -Xms${HEAP}M -Xmx${HEAP}M -Xmns${NURSERY_MIN}M -Xmnx${NURSERY_MAX}M -Xgc:concurrentScavenge -Xgc:dnssExpectedTimeRatioMaximum=3 -Xgc:scvNoAdaptiveTenure -Xdisableexplicitgc -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:-UseParallelGC -XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+UseGCOverheadLimit -XX:+ParallelRefProcEnabled -XX:-OmitStackTraceInFastThrow -XX:+ShowCodeDetailsInExceptionMessages -XX:+AlwaysPreTouch -XX:+UseAdaptiveGCBoundary -XX:-DontCompileHugeMethods -XX:+TrustFinalNonStaticFields -XX:+UseFastUnorderedTimeStamps -XX:+UseTransparentHugePages -XX:+UseLargePagesInMetaspace -XX:LargePageSizeInBytes=2M -XX:+UseLargePages -Xjit:enableGPU -Xshareclasses -XX:-IgnoreUnrecognizedXXColonOptions -Xcompressedrefs -jar ${JAR_NAME} -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -Dibm.gpu.enable=all -Dibm.gpu.verbose=true -Dterminal.jline=false -Dterminal.ansi=true"
+	CMD="java -Xms${HEAP_SIZE}M -Xmx${HEAP_SIZE}M -Xmns${NURSERY_MINIMUM}M -Xmnx${NURSERY_MAXIMUM}M -Xgc:concurrentScavenge -Xgc:dnssExpectedTimeRatioMaximum=3 -Xgc:scvNoAdaptiveTenure -Xdisableexplicitgc -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:-UseParallelGC -XX:+IgnoreUnrecognizedVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+UseGCOverheadLimit -XX:+ParallelRefProcEnabled -XX:-OmitStackTraceInFastThrow -XX:+ShowCodeDetailsInExceptionMessages -XX:+AlwaysPreTouch -XX:+UseAdaptiveGCBoundary -XX:-DontCompileHugeMethods -XX:+TrustFinalNonStaticFields -XX:+UseFastUnorderedTimeStamps -XX:+UseTransparentHugePages -XX:+UseLargePagesInMetaspace -XX:LargePageSizeInBytes=2M -XX:+UseLargePages -Xjit:enableGPU -Xshareclasses -XX:-IgnoreUnrecognizedXXColonOptions -Xcompressedrefs -jar ${JAR_NAME} -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -Dibm.gpu.enable=all -Dibm.gpu.verbose=true -Dterminal.jline=false -Dterminal.ansi=true"
 fi
 echo "Checking CUDA version and host GPU."
 nvcc --version | echo "Error checking CUDA version."
