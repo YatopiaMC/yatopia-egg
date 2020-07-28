@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-07-27T17:02:23-05:00",
+    "exported_at": "2020-07-28T14:39:25-05:00",
     "name": "YAPFA",
     "author": "unknown@unknown.com",
     "description": "Fork of Tuinity aimed at being better.",
     "image": "docker.io\/bgidiere\/adoptopenjdk14-cuda-openj9xl-centos-slim",
-    "startup": ".\/start.sh {{SERVER_MEMORY}} {{SERVER_JARFILE}}",
+    "startup": ".\/start.sh",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
@@ -17,20 +17,10 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# YAPFA Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\nyum update\r\nyum -y install curl\r\ncd \/mnt\/server\r\n\r\nif [ ! -f server.properties ]; then\r\ncurl -o server.properties https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft_java\/server.properties\r\nfi\r\n\r\ncurl https:\/\/raw.githubusercontent.com\/budgidiere\/yapfa-egg\/master\/start.sh > start.sh",
+            "script": "#!\/bin\/bash\r\n# YAPFA Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nif [ ! -f server.properties ]; then\r\nwget  https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/java\/server.properties\r\nfi\r\n\r\nwget -N https:\/\/raw.githubusercontent.com\/budgidiere\/yapfa-egg\/master\/start.sh\r\n\r\n\r\nsudo chmod 777 start.sh",
             "container": "bgidiere\/adoptopenjdk14-cuda-openj9xl-centos-slim:latest",
             "entrypoint": "bash"
         }
     },
-    "variables": [
-        {
-            "name": "Server Jar File",
-            "description": "The name of the server jarfile to run the server with.",
-            "env_variable": "SERVER_JARFILE",
-            "default_value": "server.jar",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:20"
-        }
-    ]
+    "variables": []
 }
