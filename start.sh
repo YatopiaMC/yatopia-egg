@@ -5,15 +5,22 @@
 # Licensed under the MIT license.
 #
 #
-
+function memory_limit
+{
+  awk -F: '/^[0-9]+:memory:/ {
+    filepath="/sys/fs/cgroup/memory"$3"/memory.limit_in_bytes";
+    getline line < filepath;
+    print line
+  }' /proc/self/cgroup
+}
 ## BEGIN CONFIGURATION
 
 # HEAP_SIZE: This is how much heap (in MB) you plan to allocate
 #            to your server. By default, this is set to 4096MB,
 #            or 4GB.
-MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
-MEM_TOTALLE=${MEM_TOTAL::-3}
-MEM_TOTALMB=$(($MEM_TOTALLE / 1000))
+#MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
+#MEM_TOTALLE=${MEM_TOTAL::-3}
+MEM_TOTALMB=$(($(memory_limit) / 1000))
 HEAP_SIZE=$(($MEM_TOTALMB * 90 / 100))
 
 # JAR_NAME:  The name of your server's JAR file.
