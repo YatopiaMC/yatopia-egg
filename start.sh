@@ -15,14 +15,14 @@ MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
 HEAP_SIZE=$MEM_TOTAL*90/100
 
 # JAR_NAME:  The name of your server's JAR file.
-JAR_NAME=$2
+JAR_NAME=yapfa.jar
 ## END CONFIGURATION -- DON'T TOUCH ANYTHING BELOW THIS LINE!
 echo "Downloading latest script. This will be used next launch."
-curl https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh > start.sh
+wget https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh
 
 echo "Downloading latest jar. This will be used this launch."
 rm $JAR_NAME
-curl https://github.com/USER/PROJECT/releases/latest/download/YAPFA-1.16.1-JDK14-paperclip.jar -o $JAR_NAME
+wget https://github.com/USER/PROJECT/releases/latest/download/YAPFA-1.16.1-JDK14-paperclip.jar -o $JAR_NAME
 
 ## BEGIN SCRIPT
 
