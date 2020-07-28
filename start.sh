@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #
 # Properly tunes a Minecraft server to run efficiently under the
 # OpenJ9 (https://www.eclipse.org/openj9) JVM and other YAPFA Stuff.
@@ -13,7 +11,8 @@
 # HEAP_SIZE: This is how much heap (in MB) you plan to allocate
 #            to your server. By default, this is set to 4096MB,
 #            or 4GB.
-HEAP_SIZE=$1
+MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
+HEAP_SIZE=$MEM_TOTAL*90/100
 
 # JAR_NAME:  The name of your server's JAR file.
 JAR_NAME=$2
