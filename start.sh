@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #
 # Properly tunes a Minecraft server to run efficiently under the
 # OpenJ9 (https://www.eclipse.org/openj9) JVM and other YAPFA Stuff.
@@ -22,13 +20,8 @@ echo "Downloading latest script. This will be used next launch."
 curl https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh > start.sh
 
 echo "Downloading latest jar. This will be used this launch."
-rm yapfa*.jar
-curl -s https://api.github.com/repos/jgm/pandoc/releases/latest \
-| grep "YAPFA-1.16.1-JDK14-*.jar" \
-| cut -d : -f 2,3 \
-| tr -d \" \
-| wget -qi -
-mv YAPFA-1.16.1-JDK14-*.jar $JAR_NAME
+rm $JAR_NAME
+curl https://github.com/USER/PROJECT/releases/latest/download/YAPFA-1.16.1-JDK14-paperclip.jar -o $JAR_NAME
 
 ## BEGIN SCRIPT
 
