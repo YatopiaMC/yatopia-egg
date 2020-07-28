@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 # Properly tunes a Minecraft server to run efficiently under the
 # OpenJ9 (https://www.eclipse.org/openj9) JVM and other YAPFA Stuff.
