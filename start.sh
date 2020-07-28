@@ -12,18 +12,19 @@
 #            to your server. By default, this is set to 4096MB,
 #            or 4GB.
 MEM_TOTAL=$(awk -F":" '$1~/MemTotal/{print $2}' /proc/meminfo )
-HEAP_SIZE=$MEM_TOTAL*90/100
+MEM_TOTALMB={$MEM_TOTAL::-3}
+HEAP_SIZE=$(($MEM_TOTALMB * 90 / 100))
 
 # JAR_NAME:  The name of your server's JAR file.
 JAR_NAME=yapfa.jar
 ## END CONFIGURATION -- DON'T TOUCH ANYTHING BELOW THIS LINE!
 echo "Downloading latest script. This will be used next launch."
-wget https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh
+wget -N https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh
 dos2unix start.sh
 
 echo "Downloading latest jar. This will be used this launch."
-rm $JAR_NAME
-wget https://github.com/USER/PROJECT/releases/latest/download/YAPFA-1.16.1-JDK14-paperclip.jar -o $JAR_NAME
+#rm $JAR_NAME
+wget -N https://github.com/USER/PROJECT/releases/latest/download/YAPFA-1.16.1-JDK14-paperclip.jar -o $JAR_NAME
 
 ## BEGIN SCRIPT
 
