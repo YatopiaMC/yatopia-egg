@@ -19,6 +19,7 @@ JAR_NAME=yapfa.jar
 ## END CONFIGURATION -- DON'T TOUCH ANYTHING BELOW THIS LINE!
 echo "Downloading latest script. This will be used next launch."
 wget https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh
+dos2unix start.sh
 
 echo "Downloading latest jar. This will be used this launch."
 rm $JAR_NAME
