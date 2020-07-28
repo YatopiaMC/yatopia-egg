@@ -19,6 +19,7 @@ JAR_NAME=$2
 ## END CONFIGURATION -- DON'T TOUCH ANYTHING BELOW THIS LINE!
 echo "Downloading latest script. This will be used next launch."
 curl https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh > start.sh
+tr -d '\r' < start.sh > start.sh
 
 echo "Downloading latest jar. This will be used this launch."
 rm $JAR_NAME
