@@ -24,7 +24,7 @@ wget -N https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh
 
 echo "Downloading latest jar. This will be used this launch."
 #rm $JAR_NAME
-wget -N https://github.com/tr7zw/YAPFA/releases/download/release/YAPFA-1.16.1-JDK14-paperclip.jar -o $JAR_NAME
+wget -N -O $JAR_NAME https://github.com/tr7zw/YAPFA/releases/download/release/YAPFA-1.16.1-JDK14-paperclip.jar 
 
 ## BEGIN SCRIPT
 
