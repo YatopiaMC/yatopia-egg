@@ -16,15 +16,15 @@
 HEAP_SIZE=$(($1 * 85 / 100))
 
 # JAR_NAME:  The name of your server's JAR file.
-JAR_NAME=YAPFA-1.16.1-JDK14-paperclip.jar
+JAR_NAME=Yatopia-1.16.1-JDK14-paperclip.jar
 ## END CONFIGURATION -- DON'T TOUCH ANYTHING BELOW THIS LINE!
 echo "Downloading latest script. This will be used next launch."
-wget -N https://raw.githubusercontent.com/budgidiere/yapfa-egg/master/start.sh
+wget -N https://raw.githubusercontent.com/budgidiere/yatopia-egg/master/start.sh
 
 
 echo "Downloading latest jar. This will be used this launch."
 #rm $JAR_NAME
-wget -N -O $JAR_NAME https://github.com/tr7zw/YAPFA/releases/download/release/YAPFA-1.16.1-JDK14-paperclip.jar 
+wget -N -O $JAR_NAME https://github.com/tr7zw/Yatopia/releases/download/1.16.1/Yatopia-1.16.1-JDK14-paperclip.jar
 
 ## BEGIN SCRIPT
 
